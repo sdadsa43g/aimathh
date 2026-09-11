@@ -1,0 +1,12 @@
+FROM python:3.11-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1 MPLBACKEND=Agg PIP_NO_CACHE_DIR=1
+WORKDIR /app
+
+COPY pyproject.toml README.md ./
+COPY src ./src
+RUN pip install --no-cache-dir . && useradd -u 65532 -m harness && mkdir -p /app/data && chown -R 65532 /app/data
+
+USER 65532
+EXPOSE 8000
+CMD ["uvicorn", "aimathh.server.app:app", "--host", "0.0.0.0", "--port", "8000"]
