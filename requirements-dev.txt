@@ -1,0 +1,2 @@
+# aimathh — dev requirements (pip fallback; prefer `pip install -e .[dev]`)
+-e .[dev]

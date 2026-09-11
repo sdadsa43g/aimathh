@@ -1,0 +1,66 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "aimathh"
+version = "0.1.0"
+description = "Universal Mathematical & Physics AI Research Harness"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "Apache-2.0" }
+authors = [{ name = "aimathh" }]
+keywords = ["math", "physics", "ai", "research", "simulation", "verification"]
+dependencies = [
+  "fastapi>=0.110",
+  "uvicorn[standard]>=0.29",
+  "pydantic>=2.6",
+  "pydantic-settings>=2.2",
+  "httpx>=0.27",
+  "numpy>=1.26",
+  "scipy>=1.12",
+  "sympy>=1.12",
+  "mpmath>=1.3",
+  "pint>=0.23",
+  "pandas>=2.0",
+  "matplotlib>=3.8",
+  "plotly>=5.18",
+  "pyyaml>=6.0",
+  "jinja2>=3.1",
+  "python-multipart>=0.0.9",
+  "aiofiles>=23.2",
+  "anyio>=4.0",
+  "psutil>=5.9",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "pytest-asyncio>=0.23",
+  "ruff>=0.4",
+  "mypy>=1.9",
+  "types-pyyaml",
+]
+jax = ["jax>=0.4", "jaxlib>=0.4"]
+notebook = ["nbformat>=5.9", "nbclient>=0.9", "ipykernel>=6.29"]
+all = ["aimathh[jax,notebook]"]
+
+[project.scripts]
+aimathh = "aimathh.cli.main:main"
+aimathh-server = "aimathh.server.app:run"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+addopts = "-q"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
